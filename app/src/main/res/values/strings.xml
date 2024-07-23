@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">app_controle_financeiro</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- my strings -->
+    <string name="string_spending_investment">Gastos e Investimentos</string>
+    <string name="string_spending">Gastos</string>
+    <string name="string_investment">Investimentos</string>
+    <string name="string_categories">Categorias</string>
+    <string name="string_category">Categoria</string>
+    <string name="string_added_to_the_wall">Adicionado ao mural</string>
+    <string name="string_select_the_type">Selecione o tipo</string>
+    <string name="string_select_the_action">Selecione uma ação</string>
+    <string name="string_enter_the_value">Informe o valor</string>
+    <string name="string_enter_the_day">Informe o dia</string>
+    <string name="string_enter_a_valid_date">Informe uma data valida</string>
+    <string name="string_add_up_your_spending">Adicione seu gasto</string>
+    <string name="string_action">Ação</string>
+    <string name="string_type">Tipo</string>
+    <string name="string_describe_your_investment">Descreva seu investimento</string>
+    <string name="string_ex_shares_cash">Ex: Ações, caixinha (Nubank)…</string>
+    <string name="string_optional">Opcional</string>
+    <string name="string_value">Valor</string>
+    <string name="string_ex_50">Ex: R$50,00</string>
+    <string name="string_day_month_year">Dia/Mês/Ano</string>
+    <string name="string_ex_01_01_2000">ex: 01/01/2000</string>
+    <string name="string_send">Enviar</string>
+    <string name="string_delete">Excluir</string>
+    <string name="string_image_with_warning_icon">imagem com ícone de aviso</string>
+    <string name="string_here_are_all_your_expenses">Aqui estão todos os seus gastos</string>
+    <string name="string_here_are_all_your_investments">Aqui estão todos os sus investimentos</string>
+
+    <string-array name="string_array_types">
+        <item>Selecione o tipo</item>
+        <item>Delivery</item>
+        <item>Internet</item>
+        <item>Mercado</item>
+        <item>Compra online</item>
+        <item>Àgua</item>
+        <item>Luz</item>
+        <item>Gasolina</item>
+        <item>Academia</item>
+        <item>Aluguel</item>
+        <item>Festa (role)</item>
+    </string-array>
+
+</resources>

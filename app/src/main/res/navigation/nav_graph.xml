@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/add_a_control_nav">
+
+    <fragment
+        android:id="@+id/add_a_control_nav"
+        android:name="com.example.app_controle_financeiro.ui.AddAControlFragment"
+        android:label="fragment_add_a_control"
+        tools:layout="@layout/fragment_add_a_control" />
+    <fragment
+        android:id="@+id/wall_of_actions_nav"
+        android:name="com.example.app_controle_financeiro.ui.WallOfActionsFragment"
+        android:label="fragment_wall_of_actions"
+        tools:layout="@layout/fragment_wall_of_actions" />
+    <fragment
+        android:id="@+id/spending_graph_nav"
+        android:name="com.example.app_controle_financeiro.ui.SpendingGraphFragment"
+        android:label="fragment_spending_graph"
+        tools:layout="@layout/fragment_spending_graph" >
+        <action
+            android:id="@+id/action_spending_graph_nav_to_onlyInvestmentFragment"
+            app:destination="@id/onlyInvestmentFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_spending_graph_nav_to_onlySpedingFragment"
+            app:destination="@id/onlySpedingFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/onlyInvestmentFragment"
+        android:name="com.example.app_controle_financeiro.ui.OnlyInvestmentFragment"
+        android:label="fragment_only_investment"
+        tools:layout="@layout/fragment_only_investment" />
+    <fragment
+        android:id="@+id/onlySpedingFragment"
+        android:name="com.example.app_controle_financeiro.ui.OnlySpendingFragment"
+        android:label="fragment_only_speding"
+        tools:layout="@layout/fragment_only_spending" />
+</navigation>
