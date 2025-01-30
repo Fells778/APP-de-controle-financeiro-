@@ -22,12 +22,6 @@ object Helpers {
         return cleanedDate.toInt()
     }
 
-
-    fun formatDate(date: Int): String {
-        val dateString = date.toString()
-        return "${dateString.substring(0..1)}/${dateString.substring(2..3)}/${dateString.substring(5..9)}"
-    }
-
     // Esconder o teclado
     fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

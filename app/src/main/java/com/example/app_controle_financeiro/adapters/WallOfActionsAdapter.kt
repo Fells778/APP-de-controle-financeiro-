@@ -11,7 +11,6 @@ import com.example.app_controle_financeiro.R
 import com.example.app_controle_financeiro.databinding.CustomLayoutWallOfActionsBinding
 import com.example.app_controle_financeiro.utils.Actions
 import com.example.app_controle_financeiro.utils.Helpers.formatCurrency
-import com.example.app_controle_financeiro.utils.Helpers.formatDate
 
 class WallOfActionsAdapter :
     ListAdapter<Actions, WallOfActionsAdapter.MainViewHolder>(ActionsDiffCallback()) {
@@ -39,15 +38,25 @@ class WallOfActionsAdapter :
         private val viewColor = binding.viewColor
 
         fun bind(actions: Actions) {
+
             action.text = actions.action
             type.text = actions.type
             values.text = formatCurrency(actions.value ?: 0f)
             description.text = actions.description
             try {
-                date.text = formatDate(actions.date ?: 0)
+                // VERIFICAR PQ NÃO ESTA PASSANDO O NUMERO QUANDO A DATA COMEÇA COM 0 (ZERO)...
+                //MUDAR ISSO DAQUI!!!
+                val teste = actions.date.toString()
+                if (teste.length.toString().toInt() == 8) {
+                    val aaa = "${teste.substring(0..1)}/${teste.substring(2..3)}/${teste.substring(4..7)}"
+                    date.text = aaa
+                }else{
+                    date.text = actions.date.toString()
+                }
             } catch (e: Exception) {
-                println("=========== ${e.cause} e ${actions.date.toString()}")
+                println("=========== catch adapter ${e.cause} e ${actions.date.toString()}")
             }
+
             when (actions.action) {
                 "Gasto" -> {
                     description.isVisible = false

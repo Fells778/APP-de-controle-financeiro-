@@ -122,6 +122,7 @@ class AddAControlFragment : Fragment() {
         editor.apply()
     }
 
+
     private fun loadData(): List<Actions> {
         val sharedPreferences =
             requireContext().getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
@@ -240,13 +241,14 @@ class AddAControlFragment : Fragment() {
             "Delivery",
             "Internet",
             "Mercado",
-            "Comprar online",
-            "Àgua",
+            "Compras online",
+            "Água",
             "Luz",
             "Gasolina",
             "Academia",
             "Aluguel",
-            "Festa (role)"
+            "Festa/rolé",
+            "Outros"
         )
         val adapterTypes =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, typeList)
