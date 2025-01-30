@@ -38,20 +38,21 @@ class WallOfActionsAdapter :
         private val viewColor = binding.viewColor
 
         fun bind(actions: Actions) {
-
+            itemView.setOnClickListener {
+                println(date.text)
+            }
             action.text = actions.action
             type.text = actions.type
             values.text = formatCurrency(actions.value ?: 0f)
             description.text = actions.description
             try {
-                // VERIFICAR PQ NÃO ESTA PASSANDO O NUMERO QUANDO A DATA COMEÇA COM 0 (ZERO)...
-                // MUDAR ISSO DAQUI!!!
-                val teste = actions.date.toString()
-                if (teste.length.toString().toInt() == 8) {
-                    val aaa = "${teste.substring(0..1)}/${teste.substring(2..3)}/${teste.substring(4..7)}"
+                val formatDate = actions.date.toString()
+                if (formatDate.length.toString().toInt() == 8) {
+                    val aaa = "${formatDate.substring(0..1)}/${formatDate.substring(2..3)}/${formatDate.substring(4..7)}"
                     date.text = aaa
-                }else{
-                    date.text = actions.date.toString()
+                }else if (formatDate.length.toString().toInt() < 8){
+                    val dataWithZeroStart = "0${formatDate.substring(0..0)}/${formatDate.substring(1..2)}/${formatDate.substring(3..6)}"
+                    date.text = dataWithZeroStart
                 }
             } catch (e: Exception) {
                 println("=========== catch adapter ${e.cause} e ${actions.date.toString()}")

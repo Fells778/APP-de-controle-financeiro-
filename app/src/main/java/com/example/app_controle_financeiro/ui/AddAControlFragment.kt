@@ -86,8 +86,12 @@ class AddAControlFragment : Fragment() {
         println("================= $type & $description")
         addAction(action, type, description, value, date)
 
+        Toast.makeText(context, date, Toast.LENGTH_SHORT).show()
+        println("============== AASASASAS: $action, $type, $description, $value, $date")
+
     }
 
+    // Olhar pq não tá passando investimento (ainda tá com erro do gasto e tipo)...
     private fun addAction(
         action: String,
         type: String,
@@ -230,7 +234,6 @@ class AddAControlFragment : Fragment() {
                 }
 
             }
-
 
         }
     }
