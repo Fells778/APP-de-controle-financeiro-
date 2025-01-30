@@ -45,7 +45,7 @@ class WallOfActionsAdapter :
             description.text = actions.description
             try {
                 // VERIFICAR PQ NÃO ESTA PASSANDO O NUMERO QUANDO A DATA COMEÇA COM 0 (ZERO)...
-                //MUDAR ISSO DAQUI!!!
+                // MUDAR ISSO DAQUI!!!
                 val teste = actions.date.toString()
                 if (teste.length.toString().toInt() == 8) {
                     val aaa = "${teste.substring(0..1)}/${teste.substring(2..3)}/${teste.substring(4..7)}"
