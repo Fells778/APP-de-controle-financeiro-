@@ -48,8 +48,8 @@ class WallOfActionsAdapter :
             try {
                 val formatDate = actions.date.toString()
                 if (formatDate.length.toString().toInt() == 8) {
-                    val aaa = "${formatDate.substring(0..1)}/${formatDate.substring(2..3)}/${formatDate.substring(4..7)}"
-                    date.text = aaa
+                    val certainDate = "${formatDate.substring(0..1)}/${formatDate.substring(2..3)}/${formatDate.substring(4..7)}"
+                    date.text = certainDate
                 }else if (formatDate.length.toString().toInt() < 8){
                     val dataWithZeroStart = "0${formatDate.substring(0..0)}/${formatDate.substring(1..2)}/${formatDate.substring(3..6)}"
                     date.text = dataWithZeroStart

@@ -25,7 +25,6 @@ import com.example.app_controle_financeiro.utils.MoneyMaskWatcher
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-
 class AddAControlFragment : Fragment() {
     private lateinit var binding: FragmentAddAControlBinding
 
@@ -47,7 +46,7 @@ class AddAControlFragment : Fragment() {
         initMasks()
         hideKeyboard()
     }
-
+// Começar a fazer o darkmode e olhar pq tá com o nome categorias no grafico...
     private fun initMasks() {
         binding.apply {
             editTextValue.addTextChangedListener(MoneyMaskWatcher(editTextValue))
@@ -63,6 +62,7 @@ class AddAControlFragment : Fragment() {
                     clearFields()
                     loading()
                 }
+                hideKeyboard()
             }
         }
     }
@@ -74,8 +74,9 @@ class AddAControlFragment : Fragment() {
         var type = binding.spinnerType.selectedItem.toString()
         var description = binding.editTextDescriptionAdd.text.toString()
 
+        val emptyType = listOf("Investimento")
         if (type.isEmpty()) {
-            type = "Null em type"
+            type = emptyType.toString()
         }
 
         description = if (description.isEmpty()) {
@@ -83,15 +84,12 @@ class AddAControlFragment : Fragment() {
         } else {
             binding.editTextDescriptionAdd.text.toString()
         }
-        println("================= $type & $description")
-        addAction(action, type, description, value, date)
 
-        Toast.makeText(context, date, Toast.LENGTH_SHORT).show()
-        println("============== AASASASAS: $action, $type, $description, $value, $date")
+        addAction(action, type, description, value, date)
+        println("============== passingDataToTheWall: $action, $type, $description, $value, $date")
 
     }
 
-    // Olhar pq não tá passando investimento (ainda tá com erro do gasto e tipo)...
     private fun addAction(
         action: String,
         type: String,
@@ -281,6 +279,7 @@ class AddAControlFragment : Fragment() {
     private fun buttonClearFields() {
         binding.buttonDeleteControl.setOnClickListener {
             clearFields()
+            hideKeyboard()
         }
     }
 
@@ -293,12 +292,10 @@ class AddAControlFragment : Fragment() {
     }
 
     private fun hideKeyboard() {
-        if (binding.editTextDay.length() == 5) {
-            val inputMethodMenage =
-                requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-            val view = requireActivity().currentFocus ?: View(activity)
-            inputMethodMenage.hideSoftInputFromWindow(view.windowToken, 0)
-        }
+        val inputMethodMenage =
+            requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val view = requireActivity().currentFocus ?: View(activity)
+        inputMethodMenage.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun loading() {
@@ -312,7 +309,7 @@ class AddAControlFragment : Fragment() {
         dialog.show()
     }
 
-    private fun dataIsValid(){
+    private fun dataIsValid() {
         val date = binding.editTextDay.text
 
 
