@@ -3,15 +3,15 @@
     <item
         android:id="@+id/add_a_control_nav"
         android:icon="@drawable/baseline_add_box_black"
-        android:title="Add a control" />
+        android:title="@string/add_a_control" />
 
     <item
         android:id="@+id/wall_of_actions_nav"
         android:icon="@drawable/outline_featured_play_list_24"
-        android:title="Spending List" />
+        android:title="@string/spending_list" />
 
     <item
         android:id="@+id/spending_graph_nav"
         android:icon="@drawable/baseline_data_saver_off_blck"
-        android:title="Spending graph" />
+        android:title="@string/spending_graph" />
 </menu>

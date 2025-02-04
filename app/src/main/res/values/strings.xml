@@ -5,8 +5,10 @@
 
     <!-- my strings -->
     <string name="string_spending_investment">Gastos e Investimentos</string>
-    <string name="string_spending">Gastos</string>
-    <string name="string_investment">Investimentos</string>
+    <string name="string_expenses">Gastos</string>
+    <string name="string_spending">Gasto</string>
+    <string name="string_investments">Investimentos</string>
+    <string name="string_investment">Investimento</string>
     <string name="string_categories">Categorias</string>
     <string name="string_category">Categoria</string>
     <string name="string_added_to_the_wall">Adicionado ao mural</string>
@@ -30,6 +32,9 @@
     <string name="string_image_with_warning_icon">imagem com ícone de aviso</string>
     <string name="string_here_are_all_your_expenses">Aqui estão todos os seus gastos</string>
     <string name="string_here_are_all_your_investments">Aqui estão todos os sus investimentos</string>
+    <string name="add_a_control">Add a control</string>
+    <string name="spending_list">Spending List</string>
+    <string name="spending_graph">Spending graph</string>
 
     <string-array name="string_array_types">
         <item>Selecione o tipo</item>

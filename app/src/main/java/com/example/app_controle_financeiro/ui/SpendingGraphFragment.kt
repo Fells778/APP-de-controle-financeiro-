@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.app_controle_financeiro.R
 import com.example.app_controle_financeiro.databinding.FragmentSpendingGraphBinding
 import com.example.app_controle_financeiro.utils.Actions
 import com.github.mikephil.charting.animation.Easing
@@ -22,6 +25,7 @@ import com.google.gson.reflect.TypeToken
 
 class SpendingGraphFragment : Fragment() {
     private lateinit var binding: FragmentSpendingGraphBinding
+    private val viewModel: SpendingGraphViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +40,10 @@ class SpendingGraphFragment : Fragment() {
     }
 
     private fun initViews() {
-        val actions = loadData(requireContext())
-        saveData(requireContext(), actions)
         setupPieChart()
-        loadPieChartData()
+        viewModel.actions.observe(viewLifecycleOwner) {
+            loadPieChartData()
+        }
     }
 
 
@@ -47,11 +51,12 @@ class SpendingGraphFragment : Fragment() {
         binding.pieChart.apply {
             isDrawHoleEnabled = true
             setUsePercentValues(true)
-            setEntryLabelTextSize(12f)
+            setEntryLabelTextSize(14f)
             setEntryLabelColor(Color.BLACK)
-            centerText = "Gastos e Investimentos"
+            centerText = context?.getString(R.string.string_spending_investment)
             setCenterTextSize(24f)
             description.isEnabled = false
+
             clickOnTheGraph()
         }
     }
@@ -84,71 +89,27 @@ class SpendingGraphFragment : Fragment() {
     }
 
     private fun loadPieChartData() {
-        val actions = loadData(requireContext())
-
-        println("============= actions $actions")
-        val totalSpending = actions.filter { it.action == "Gasto" }
-            .mapNotNull { it.value }
-            .sum()
-        val totalInvestment = actions.filter { it.action == "Investimento" }
-            .mapNotNull { it.value }
-            .sum()
-
-        val total = totalSpending + totalInvestment
-
-
-        val spendingPercentage = (totalSpending / total) * 100
-        val investmentPercentage = (totalInvestment / total) * 100
-
-        val entries = mutableListOf<PieEntry>()
-        entries.add(PieEntry(spendingPercentage, "Gastos"))
-        entries.add(PieEntry(investmentPercentage, "Investimentos"))
-
-        println("========================== Grafico: $totalSpending & $totalInvestment & $total ================")
+        val entries = viewModel.getPieChartData()
         val colors = listOf(
-            Color.rgb(244, 67, 54), // Vermelho
-            Color.rgb(76, 175, 80) // Verde
+            ContextCompat.getColor(requireContext(), R.color.color_spent),
+            ContextCompat.getColor(requireContext(), R.color.color_investment)
         )
 
-        val dataSet = PieDataSet(entries, "Categorias")
-        dataSet.colors = colors
+        val dataSet = PieDataSet(entries, getString(R.string.string_category)).apply {
+            this.colors = colors
+        }
 
-        val data = PieData(dataSet)
-        data.setDrawValues(true)
-        data.setValueTextSize(24f)
-        data.setValueTextColor(Color.BLACK)
+        val data = PieData(dataSet).apply {
+            setDrawValues(true)
+            setValueTextSize(24f)
+            setValueTextColor(Color.BLACK)
+        }
 
         binding.pieChart.apply {
             this.data = data
             invalidate() // Atualize o gráfico
             animateY(1000, Easing.EaseInOutCirc)
         }
-    }
-
-    private fun saveData(context: Context, actions: List<Actions>) {
-        val sharedPreferences =
-            context.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
-        val gson = Gson()
-        val json = gson.toJson(actions)
-
-        editor.putString("actionsList", json)
-        editor.apply()
-    }
-
-    private fun loadData(context: Context): List<Actions> {
-        val sharedPreferences =
-            context.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
-        val json = sharedPreferences.getString("actionsList", null)
-
-        if (json != null) {
-            val gson = Gson()
-            val type = object : TypeToken<List<Actions>>() {}.type
-            return gson.fromJson(json, type)
-        }
-
-        return emptyList()
     }
 
 }

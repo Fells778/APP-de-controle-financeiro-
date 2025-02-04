@@ -6,6 +6,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/bk_dark_mode"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -33,6 +34,7 @@
                     android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:text="@string/string_add_up_your_spending"
+                    android:textColor="@color/default_color_text"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
@@ -124,13 +126,15 @@
                         android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="@string/string_action"
+                        android:textColor="@color/default_color_text"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <Spinner
                         android:id="@+id/spinner_action"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp" />
+                        android:layout_height="48dp"
+                        android:backgroundTint="#000000" />
 
                     <TextView
                         android:id="@+id/textView6"
@@ -138,12 +142,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@string/string_type"
+                        android:textColor="@color/default_color_text"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:visibility="gone"
                         tools:visibility="visible" />
 
-                    <Spinner
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_type"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
@@ -165,6 +170,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/string_describe_your_investment"
+                            android:textColor="@color/default_color_text"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -174,6 +180,7 @@
                             android:layout_height="48dp"
                             android:ems="10"
                             android:hint="@string/string_ex_shares_cash"
+                            android:textColorHint="@color/color_grey"
                             android:inputType="text"
                             android:maxLength="20"
                             android:maxLines="1"
@@ -185,6 +192,7 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="2dp"
                             android:text="@string/string_optional"
+                            android:textColor="@color/black"
                             android:textAlignment="textEnd"
                             android:textSize="12sp"
                             android:textStyle="italic"
@@ -197,6 +205,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="@string/string_value"
+                        android:textColor="@color/default_color_text"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -205,6 +214,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:hint="@string/string_ex_50"
+                        android:textColorHint="@color/color_grey"
                         android:inputType="numberDecimal"
                         android:textSize="14sp" />
 
@@ -214,6 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@string/string_day_month_year"
+                        android:textColor="@color/default_color_text"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -222,6 +233,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:hint="@string/string_ex_01_01_2000"
+                        android:textColorHint="@color/color_grey"
                         android:inputType="number"
                         android:maxLength="10"
                         android:textSize="14sp" />
