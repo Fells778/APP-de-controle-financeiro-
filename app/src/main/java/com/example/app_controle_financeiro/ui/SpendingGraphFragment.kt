@@ -1,18 +1,17 @@
 package com.example.app_controle_financeiro.ui
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.app_controle_financeiro.R
 import com.example.app_controle_financeiro.databinding.FragmentSpendingGraphBinding
-import com.example.app_controle_financeiro.utils.Actions
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
@@ -20,8 +19,6 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class SpendingGraphFragment : Fragment() {
     private lateinit var binding: FragmentSpendingGraphBinding
@@ -62,30 +59,21 @@ class SpendingGraphFragment : Fragment() {
     }
 
     private fun clickOnTheGraph() {
-        try {
-            binding.pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
-                override fun onValueSelected(entry: Entry?, h: Highlight?) {
-                    if (entry != null) {
-                        when ((entry as PieEntry).label) {
-                            "Gastos" -> {
-                                findNavController().navigate(SpendingGraphFragmentDirections.actionSpendingGraphNavToOnlySpedingFragment())
-                            }
-
-                            "Investimentos" -> {
-                                findNavController().navigate(SpendingGraphFragmentDirections.actionSpendingGraphNavToOnlyInvestmentFragment())
-                            }
-                        }
-                    }
+        binding.pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+            override fun onValueSelected(entry: Entry?, h: Highlight?) {
+                when ((entry as? PieEntry)?.label) {
+                    getString(R.string.string_expenses) -> findNavController().navigate(
+                        SpendingGraphFragmentDirections.actionSpendingGraphNavToOnlySpedingFragment()
+                    )
+                    getString(R.string.string_investments) -> findNavController().navigate(
+                        SpendingGraphFragmentDirections.actionSpendingGraphNavToOnlyInvestmentFragment()
+                    )
                 }
+            }
 
-                override fun onNothingSelected() {
-                    println("=========")
-                }
+            override fun onNothingSelected() {}
 
-            })
-        } catch (e: Exception) {
-            println("================== ${e.message} ===========")
-        }
+        })
     }
 
     private fun loadPieChartData() {

@@ -46,7 +46,7 @@ class AddAControlFragment : Fragment() {
         initMasks()
         hideKeyboard()
     }
-// Começar a fazer o darkmode e olhar pq tá com o nome categorias no grafico...
+
     private fun initMasks() {
         binding.apply {
             editTextValue.addTextChangedListener(MoneyMaskWatcher(editTextValue))
