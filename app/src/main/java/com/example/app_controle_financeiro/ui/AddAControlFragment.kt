@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.app_controle_financeiro.R
 import com.example.app_controle_financeiro.databinding.FragmentAddAControlBinding
 import com.example.app_controle_financeiro.utils.Actions
@@ -27,6 +28,7 @@ import com.google.gson.reflect.TypeToken
 
 class AddAControlFragment : Fragment() {
     private lateinit var binding: FragmentAddAControlBinding
+    private val viewModel: SpendingGraphViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +46,6 @@ class AddAControlFragment : Fragment() {
         initSpinnerAction()
         buttonClearFields()
         initMasks()
-        hideKeyboard()
     }
 
     private fun initMasks() {
@@ -55,88 +56,31 @@ class AddAControlFragment : Fragment() {
     }
 
     private fun addControlList() {
-        binding.apply {
-            buttonAddControl.setOnClickListener {
-                if (verificationFields()) {
-                    passingDataToTheWall()
-                    clearFields()
-                    loading()
-                }
-                hideKeyboard()
+        binding.buttonAddControl.setOnClickListener {
+            if (verificationFields()) {
+                addAction()
+                clearFields()
+                loading()
             }
+            hideKeyboard()
         }
     }
 
-    private fun passingDataToTheWall() {
+    private fun addAction() {
         val action = binding.spinnerAction.selectedItem.toString()
-        val value = binding.editTextValue.text.toString()
-        val date = binding.editTextDay.text.toString()
-        var type = binding.spinnerType.selectedItem.toString()
-        var description = binding.editTextDescriptionAdd.text.toString()
-
-        val emptyType = listOf("Investimento")
-        if (type.isEmpty()) {
-            type = emptyType.toString()
-        }
-
-        description = if (description.isEmpty()) {
-            "Null em description"
-        } else {
-            binding.editTextDescriptionAdd.text.toString()
-        }
-
-        addAction(action, type, description, value, date)
-        println("============== passingDataToTheWall: $action, $type, $description, $value, $date")
-
-    }
-
-    private fun addAction(
-        action: String,
-        type: String,
-        description: String,
-        value: String,
-        date: String
-    ) {
-        try {
-            val valueString = removeCurrencyMask(value)
-            val dateString = removeDateMask(date)
-
-            val newAction = Actions(action, type, description, valueString, dateString)
-
-            val actionList = loadData().toMutableList()
-            actionList.add(newAction)
-            saveData(actionList)
-        } catch (e: NumberFormatException) {
-            println("Error parsing number: ${e.message}")
-        }
-    }
+        val value = removeCurrencyMask(binding.editTextValue.text.toString())
+        val date = removeDateMask(binding.editTextDay.text.toString())
+        val type = binding.spinnerType.selectedItem?.toString() ?: "Desconhecido"
+        val description =
+            binding.editTextDescriptionAdd.text?.toString()?.takeIf { it.isNotBlank() }
+                ?: "Sem descrição"
 
 
-    private fun saveData(actions: List<Actions>) {
-        val sharedPreferences =
-            requireContext().getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
+        val newAction = Actions(action, type, description, value, date.toInt())
+        println("================ addAction $date")
+        println("================ addAction $newAction")
 
-        val gson = Gson()
-        val json = gson.toJson(actions)
-
-        editor.putString("actionsList", json)
-        editor.apply()
-    }
-
-
-    private fun loadData(): List<Actions> {
-        val sharedPreferences =
-            requireContext().getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
-        val json = sharedPreferences.getString("actionsList", null)
-
-        if (json != null) {
-            val gson = Gson()
-            val type = object : TypeToken<List<Actions>>() {}.type
-            return gson.fromJson(json, type)
-        }
-
-        return emptyList()
+        viewModel.addAction(newAction)
     }
 
     private fun verificationFields(): Boolean {
@@ -288,6 +232,7 @@ class AddAControlFragment : Fragment() {
         binding.apply {
             editTextValue.text?.clear()
             editTextDay.text?.clear()
+            editTextDescriptionAdd.text?.clear()
         }
     }
 
@@ -307,12 +252,6 @@ class AddAControlFragment : Fragment() {
         dialog.setContentView(R.layout.custom_dialog_loading)
         dialog.setCancelable(false)
         dialog.show()
-    }
-
-    private fun dataIsValid() {
-        val date = binding.editTextDay.text
-
-
     }
 
 }

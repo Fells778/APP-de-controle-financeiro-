@@ -35,7 +35,14 @@ class SpendingGraphViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
-    fun saveData(actions: List<Actions>) {
+    fun addAction(action: Actions) {
+        val updateList = _actions.value.orEmpty().toMutableList()
+        updateList.add(action)
+        _actions.value = updateList
+        saveData(updateList)
+    }
+
+    private fun saveData(actions: List<Actions>) {
         val editor = sharedPreferences.edit()
         val gson = Gson()
         val json = gson.toJson(actions)

@@ -100,4 +100,9 @@ class SpendingGraphFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadPieChartData()
+    }
+
 }

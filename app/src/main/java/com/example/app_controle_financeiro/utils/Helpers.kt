@@ -17,9 +17,8 @@ object Helpers {
         return NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(value)
     }
 
-    fun removeDateMask(date: String): Int {
-        val cleanedDate = date.replace("/", "")
-        return cleanedDate.toInt()
+    fun removeDateMask(date: String): String {
+        return date.replace("/", "")
     }
 
     // Esconder o teclado
