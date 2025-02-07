@@ -39,8 +39,11 @@ class SpendingGraphFragment : Fragment() {
     private fun initViews() {
         loadPieChartData()
         setupPieChart()
+        viewModel.apply {
+            loadData()
+        }
         viewModel.actions.observe(viewLifecycleOwner) {
-            this.loadPieChartData()
+            loadPieChartData()
         }
     }
 

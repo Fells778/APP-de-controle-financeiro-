@@ -22,7 +22,7 @@ class SpendingGraphViewModel(application: Application) : AndroidViewModel(applic
         loadData()
     }
 
-     private fun loadData(){
+     fun loadData(){
         val json = sharedPreferences.getString("actionsList", null)
         if (json != null) {
             val gson = Gson()
@@ -51,7 +51,6 @@ class SpendingGraphViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun getPieChartData(): List<PieEntry> {
-        loadData()
         val actionsList = _actions.value ?: emptyList()
         val totalSpending = actionsList.filter { it.action == "Gasto"}
             .mapNotNull { it.value }

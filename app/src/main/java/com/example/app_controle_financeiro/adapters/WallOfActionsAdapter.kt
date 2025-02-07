@@ -48,22 +48,8 @@ class WallOfActionsAdapter :
 
             date.text = formatData(actions.date.toString())
 
-            when (actions.action) {
-                "Gasto" -> {
-                    description.isVisible = false
-                    type.isVisible = true
-                }
-
-                "Investimento" -> {
-                    description.isVisible = true
-                    type.isVisible = false
-                }
-
-                else -> {
-                    description.isVisible = false
-                    type.isVisible = false
-                }
-            }
+            type.isVisible = actions.action == "Gasto"
+            description.isVisible = actions.action == "Investimento"
 
             val colorsMap = mapOf(
                 "Gasto" to R.color.color_spent,
@@ -78,11 +64,21 @@ class WallOfActionsAdapter :
     private fun formatData(dataString: String): String {
         return when (dataString.length) {
             8 -> {
-                "${dataString.substring(0..2)}/${dataString.substring(2..4)}/${dataString.substring(4..8)}"
+                "${dataString.substring(0..2)}/${dataString.substring(2..4)}/${
+                    dataString.substring(
+                        4..8
+                    )
+                }"
             }
+
             7 -> {
-                "0${dataString.substring(0..0)}/${dataString.substring(1..2)}/${dataString.substring(3..6)}"
+                "0${dataString.substring(0..0)}/${dataString.substring(1..2)}/${
+                    dataString.substring(
+                        3..6
+                    )
+                }"
             }
+
             else -> {
                 "Data inválida!"
             }
