@@ -61,8 +61,8 @@ dependencies {
 
     //LiveData
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
 
     // Network logs
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
@@ -83,5 +83,4 @@ dependencies {
 
     //MPAndroidChart
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
-
 }

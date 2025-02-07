@@ -5,12 +5,10 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.app_controle_financeiro.R
 import com.example.app_controle_financeiro.utils.Actions
 import com.github.mikephil.charting.data.PieEntry
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.lang.reflect.Type
 
 class SpendingGraphViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -24,7 +22,7 @@ class SpendingGraphViewModel(application: Application) : AndroidViewModel(applic
         loadData()
     }
 
-    private fun loadData(){
+     private fun loadData(){
         val json = sharedPreferences.getString("actionsList", null)
         if (json != null) {
             val gson = Gson()
@@ -38,7 +36,9 @@ class SpendingGraphViewModel(application: Application) : AndroidViewModel(applic
     fun addAction(action: Actions) {
         val updateList = _actions.value.orEmpty().toMutableList()
         updateList.add(action)
-        _actions.value = updateList
+        // Notificando a UI
+        _actions.postValue(updateList)
+        // Salvando no SharedPreferences
         saveData(updateList)
     }
 
@@ -51,6 +51,7 @@ class SpendingGraphViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun getPieChartData(): List<PieEntry> {
+        loadData()
         val actionsList = _actions.value ?: emptyList()
         val totalSpending = actionsList.filter { it.action == "Gasto"}
             .mapNotNull { it.value }

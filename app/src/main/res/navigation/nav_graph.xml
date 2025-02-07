@@ -39,10 +39,18 @@
         android:id="@+id/onlyInvestmentFragment"
         android:name="com.example.app_controle_financeiro.ui.OnlyInvestmentFragment"
         android:label="fragment_only_investment"
-        tools:layout="@layout/fragment_only_investment" />
+        tools:layout="@layout/fragment_only_investment" >
+        <action
+            android:id="@+id/action_onlyInvestmentFragment_to_spending_graph_nav"
+            app:destination="@id/spending_graph_nav" />
+    </fragment>
     <fragment
         android:id="@+id/onlySpedingFragment"
         android:name="com.example.app_controle_financeiro.ui.OnlySpendingFragment"
         android:label="fragment_only_speding"
-        tools:layout="@layout/fragment_only_spending" />
+        tools:layout="@layout/fragment_only_spending" >
+        <action
+            android:id="@+id/action_onlySpedingFragment_to_spending_graph_nav"
+            app:destination="@id/spending_graph_nav" />
+    </fragment>
 </navigation>

@@ -45,18 +45,8 @@ class WallOfActionsAdapter :
             type.text = actions.type
             values.text = formatCurrency(actions.value ?: 0f)
             description.text = actions.description
-            try {
-                val formatDate = actions.date.toString()
-                if (formatDate.length.toString().toInt() == 8) {
-                    val certainDate = "${formatDate.substring(0..1)}/${formatDate.substring(2..3)}/${formatDate.substring(4..7)}"
-                    date.text = certainDate
-                }else if (formatDate.length.toString().toInt() < 8){
-                    val dataWithZeroStart = "0${formatDate.substring(0..0)}/${formatDate.substring(1..2)}/${formatDate.substring(3..6)}"
-                    date.text = dataWithZeroStart
-                }
-            } catch (e: Exception) {
-                println("=========== catch adapter ${e.cause} e ${actions.date.toString()}")
-            }
+
+            date.text = formatData(actions.date.toString())
 
             when (actions.action) {
                 "Gasto" -> {
@@ -75,23 +65,29 @@ class WallOfActionsAdapter :
                 }
             }
 
-            if (actions.action == "Gasto") {
-                viewColor.setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        R.color.color_spent
-                    )
-                )
-            } else {
-                viewColor.setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        R.color.color_investment
-                    )
-                )
+            val colorsMap = mapOf(
+                "Gasto" to R.color.color_spent,
+                "Investimento" to R.color.color_investment
+            )
+
+            val
+        }
+    }
+
+    private fun formatData(dataString: String): String {
+        return when (dataString.length) {
+            8 -> {
+                "${dataString.substring(0..2)}/${dataString.substring(2..4)}/${dataString.substring(4..8)}"
+            }
+            7 -> {
+                "0${dataString.substring(0..0)}/${dataString.substring(1..2)}/${dataString.substring(3..6)}"
+            }
+            else -> {
+                "Data inválida!"
             }
         }
     }
+
 
     class ActionsDiffCallback : DiffUtil.ItemCallback<Actions>() {
         override fun areItemsTheSame(oldItem: Actions, newItem: Actions): Boolean {

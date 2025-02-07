@@ -37,9 +37,10 @@ class SpendingGraphFragment : Fragment() {
     }
 
     private fun initViews() {
+        loadPieChartData()
         setupPieChart()
         viewModel.actions.observe(viewLifecycleOwner) {
-            loadPieChartData()
+            this.loadPieChartData()
         }
     }
 
@@ -99,10 +100,4 @@ class SpendingGraphFragment : Fragment() {
             animateY(1000, Easing.EaseInOutCirc)
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-        loadPieChartData()
-    }
-
 }

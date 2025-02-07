@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.app_controle_financeiro.adapters.WallOfActionsAdapter
 import com.example.app_controle_financeiro.databinding.FragmentOnlyInvestmentBinding
@@ -33,6 +34,7 @@ class OnlyInvestmentFragment : Fragment() {
         saveData(requireContext(), actions)
         initRecyclerView()
         loadingInvestment()
+        backToGraph()
     }
 
     private fun initRecyclerView() {
@@ -78,6 +80,12 @@ class OnlyInvestmentFragment : Fragment() {
         }
 
         return emptyList()
+    }
+
+    private fun backToGraph(){
+        binding.imageViewBack.setOnClickListener {
+            findNavController().navigate(OnlyInvestmentFragmentDirections.actionOnlyInvestmentFragmentToSpendingGraphNav())
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.app_controle_financeiro.adapters.WallOfActionsAdapter
 import com.example.app_controle_financeiro.databinding.FragmentOnlySpendingBinding
@@ -33,6 +34,7 @@ class OnlySpendingFragment : Fragment() {
         saveData(requireContext(), actions)
         initRecyclerView()
         loadingSpending()
+        backToGraph()
     }
 
     private fun initRecyclerView() {
@@ -77,6 +79,12 @@ class OnlySpendingFragment : Fragment() {
         }
 
         return emptyList()
+    }
+
+    private fun backToGraph(){
+        binding.imageViewBackToGraph.setOnClickListener {
+            findNavController().navigate(OnlySpendingFragmentDirections.actionOnlySpedingFragmentToSpendingGraphNav())
+        }
     }
 
 }
