@@ -70,7 +70,8 @@ class WallOfActionsAdapter :
                 "Investimento" to R.color.color_investment
             )
 
-            val
+            val color = colorsMap[actions.action] ?: R.color.default_color_text
+            viewColor.setBackgroundColor(ContextCompat.getColor(itemView.context, color))
         }
     }
 
