@@ -3,8 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     
-    <color name="color_investment">#429925</color>
-    <color name="color_spent">#B23737</color>
+    <color name="color_investment">#28A745</color>
+    <color name="color_spent">#D32F2F</color>
 
     <color name="default_color_text">#000000</color>
 

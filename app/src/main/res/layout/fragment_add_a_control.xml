@@ -6,7 +6,6 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/bk_dark_mode"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,13 +29,14 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:text="@string/string_add_up_your_spending"
                     android:textColor="@color/default_color_text"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
+                    android:typeface="normal"
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -72,10 +72,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#C80000"
-                    android:drawableEnd="@drawable/outline_close_24"
+                    android:drawableEnd="@drawable/baseline_close_white"
                     android:drawablePadding="4dp"
                     android:text="@string/string_delete"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline3"
                     app:layout_constraintTop_toTopOf="@+id/button_add_control" />
@@ -115,7 +115,7 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="24dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +140,7 @@
                         android:id="@+id/textView6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="18dp"
                         android:text="@string/string_type"
                         android:textColor="@color/default_color_text"
                         android:textSize="16sp"
@@ -159,7 +159,7 @@
                         android:id="@+id/linear_layout_description_add"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="18dp"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
                         android:visibility="gone"
@@ -180,10 +180,10 @@
                             android:layout_height="48dp"
                             android:ems="10"
                             android:hint="@string/string_ex_shares_cash"
-                            android:textColorHint="@color/color_grey"
                             android:inputType="text"
                             android:maxLength="20"
                             android:maxLines="1"
+                            android:textColorHint="@color/color_grey"
                             android:textSize="14sp" />
 
                         <TextView
@@ -192,8 +192,8 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="2dp"
                             android:text="@string/string_optional"
-                            android:textColor="@color/black"
                             android:textAlignment="textEnd"
+                            android:textColor="@color/black"
                             android:textSize="12sp"
                             android:textStyle="italic"
                             app:drawableEndCompat="@drawable/baseline_do_not_disturb_on_24" />
@@ -203,7 +203,7 @@
                         android:id="@+id/textView3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:text="@string/string_value"
                         android:textColor="@color/default_color_text"
                         android:textSize="16sp"
@@ -214,8 +214,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:hint="@string/string_ex_50"
-                        android:textColorHint="@color/color_grey"
                         android:inputType="numberDecimal"
+                        android:textColorHint="@color/color_grey"
                         android:textSize="14sp" />
 
                     <TextView
@@ -233,9 +233,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:hint="@string/string_ex_01_01_2000"
-                        android:textColorHint="@color/color_grey"
                         android:inputType="number"
                         android:maxLength="10"
+                        android:textColorHint="@color/color_grey"
                         android:textSize="14sp" />
                 </LinearLayout>
 

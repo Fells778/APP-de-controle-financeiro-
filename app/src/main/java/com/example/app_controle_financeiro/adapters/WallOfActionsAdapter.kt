@@ -89,7 +89,7 @@ class WallOfActionsAdapter :
     class ActionsDiffCallback : DiffUtil.ItemCallback<Actions>() {
         override fun areItemsTheSame(oldItem: Actions, newItem: Actions): Boolean {
             // Identificar se dois itens são os mesmos (ex: comparando ID)
-            return oldItem.date == newItem.date
+            return oldItem.date == newItem.date && oldItem.value == newItem.value
         }
 
         override fun areContentsTheSame(oldItem: Actions, newItem: Actions): Boolean {
