@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.app_controle_financeiro.R
 import com.example.app_controle_financeiro.databinding.FragmentSpendingGraphBinding
+import com.example.app_controle_financeiro.utils.DecimalValueFormatter
 import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -86,9 +89,9 @@ class SpendingGraphFragment : Fragment() {
             ContextCompat.getColor(requireContext(), R.color.color_spent),
             ContextCompat.getColor(requireContext(), R.color.color_investment)
         )
-
-        val dataSet = PieDataSet(entries, getString(R.string.string_category)).apply {
+        val dataSet = PieDataSet(entries, "").apply {
             this.colors = colors
+            valueFormatter = DecimalValueFormatter()
         }
 
         val data = PieData(dataSet).apply {
@@ -99,6 +102,11 @@ class SpendingGraphFragment : Fragment() {
 
         binding.pieChart.apply {
             this.data = data
+            legend.apply {
+                textSize = 18f
+                textColor = Color.BLACK
+                form = Legend.LegendForm.SQUARE
+            }
             invalidate() // Atualize o gráfico
             animateY(1000, Easing.EaseInOutCirc)
         }

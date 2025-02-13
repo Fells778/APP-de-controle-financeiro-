@@ -5,12 +5,14 @@
 
     <!-- my strings -->
     <string name="string_spending_investment">Gastos e Investimentos</string>
+    <string name="string_graphic">Gráfico</string>
     <string name="string_expenses">Gastos</string>
     <string name="string_spending">Gasto</string>
     <string name="string_investments">Investimentos</string>
     <string name="string_investment">Investimento</string>
     <string name="string_categories">Categorias</string>
     <string name="string_category">Categoria</string>
+    <string name="string_wall_of_actions">Mural de ações</string>
     <string name="string_added_to_the_wall">Adicionado ao mural</string>
     <string name="string_select_the_type">Selecione o tipo</string>
     <string name="string_select_the_action">Selecione uma ação</string>
@@ -35,6 +37,7 @@
     <string name="add_a_control">Add a control</string>
     <string name="spending_list">Spending List</string>
     <string name="spending_graph">Spending graph</string>
+    <string name="string_image_without_caption">Imagem sem legenda</string>
 
     <string-array name="string_array_types">
         <item>Selecione o tipo</item>
