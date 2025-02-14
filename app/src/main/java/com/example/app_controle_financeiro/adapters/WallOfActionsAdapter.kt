@@ -11,6 +11,8 @@ import com.example.app_controle_financeiro.R
 import com.example.app_controle_financeiro.databinding.CustomLayoutWallOfActionsBinding
 import com.example.app_controle_financeiro.utils.Actions
 import com.example.app_controle_financeiro.utils.Helpers.formatCurrency
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class WallOfActionsAdapter :
     ListAdapter<Actions, WallOfActionsAdapter.MainViewHolder>(ActionsDiffCallback()) {
@@ -28,6 +30,11 @@ class WallOfActionsAdapter :
         holder.bind(getItem(position))
     }
 
+    override fun submitList(list: List<Actions>?) {
+        val sortedList = list?.sortedBy { it.date }
+        super.submitList(sortedList)
+    }
+
     inner class MainViewHolder(binding: CustomLayoutWallOfActionsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val action = binding.textViewActionCustomLayout
@@ -40,13 +47,14 @@ class WallOfActionsAdapter :
         fun bind(actions: Actions) {
             itemView.setOnClickListener {
                 println(date.text)
+                println(actions.date)
             }
             action.text = actions.action
             type.text = actions.type
             values.text = formatCurrency(actions.value ?: 0f)
             description.text = actions.description
 
-            date.text = formatData(actions.date.toString())
+            date.text = formatDate(actions.date.toString())
 
             type.isVisible = actions.action == "Gasto"
             description.isVisible = actions.action == "Investimento"
@@ -61,29 +69,28 @@ class WallOfActionsAdapter :
         }
     }
 
-    private fun formatData(dataString: String): String {
-        return when (dataString.length) {
-            8 -> {
-                "${dataString.substring(0..2)}/${dataString.substring(2..4)}/${
-                    dataString.substring(
-                        4..8
-                    )
-                }"
+    fun formatDate(date: String): String {
+        return try {
+            when (date.length) {
+                8 -> {
+                    // Se já estiver no formato correto (DDMMAAAA), faz o split corretamente
+                    val formattedDate = "${date.substring(0, 2)}/${date.substring(2, 4)}/${date.substring(4, 8)}"
+                    formattedDate
+                }
+                7 -> {
+                    // Se faltar um zero no início, adicionamos manualmente
+                    val formattedDate = "0${date.substring(0, 1)}/${date.substring(1, 3)}/${date.substring(3, 7)}"
+                    formattedDate
+                }
+                else -> {
+                    "Data Inválida"
+                }
             }
-
-            7 -> {
-                "0${dataString.substring(0..0)}/${dataString.substring(1..2)}/${
-                    dataString.substring(
-                        3..6
-                    )
-                }"
-            }
-
-            else -> {
-                "Data inválida!"
-            }
+        } catch (e: Exception) {
+            "Erro ao formatar"
         }
     }
+
 
 
     class ActionsDiffCallback : DiffUtil.ItemCallback<Actions>() {

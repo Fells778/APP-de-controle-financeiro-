@@ -42,7 +42,6 @@ class WallOfActionsFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = adapterWall
         }
-        val actions = loadData(requireContext())
 
     }
 
