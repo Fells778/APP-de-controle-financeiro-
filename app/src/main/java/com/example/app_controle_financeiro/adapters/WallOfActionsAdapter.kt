@@ -11,8 +11,6 @@ import com.example.app_controle_financeiro.R
 import com.example.app_controle_financeiro.databinding.CustomLayoutWallOfActionsBinding
 import com.example.app_controle_financeiro.utils.Actions
 import com.example.app_controle_financeiro.utils.Helpers.formatCurrency
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class WallOfActionsAdapter :
     ListAdapter<Actions, WallOfActionsAdapter.MainViewHolder>(ActionsDiffCallback()) {
@@ -47,7 +45,6 @@ class WallOfActionsAdapter :
         fun bind(actions: Actions) {
             itemView.setOnClickListener {
                 println(date.text)
-                println(actions.date)
             }
             action.text = actions.action
             type.text = actions.type

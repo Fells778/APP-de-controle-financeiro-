@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.app_controle_financeiro.adapters.WallOfActionsAdapter
 import com.example.app_controle_financeiro.databinding.FragmentWallOfActionsBinding
@@ -33,9 +34,10 @@ class WallOfActionsFragment : Fragment() {
         saveData(requireContext(), actions)
         initRecyclerView()
         adapterWall.submitList(actions)
+        initSpinnerOrder()
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         adapterWall = WallOfActionsAdapter()
 
         binding.recyclerViewWallOfActions.apply {
@@ -45,9 +47,23 @@ class WallOfActionsFragment : Fragment() {
 
     }
 
+    private fun initSpinnerOrder() {
+        binding.spinnerOrder.apply {
+            val orderList = listOf("Ordernar por", "Data")
+            val adapterOrders = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                orderList
+            )
+            adapterOrders.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            adapter = adapterOrders
+        }
+    }
+
 
     private fun saveData(context: Context, actions: List<Actions>) {
-        val sharedPreferences = context.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            context.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
         val gson = Gson()
@@ -58,7 +74,8 @@ class WallOfActionsFragment : Fragment() {
     }
 
     private fun loadData(context: Context): List<Actions> {
-        val sharedPreferences = context.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            context.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val json = sharedPreferences.getString("actionsList", null)
 
         if (json != null) {
