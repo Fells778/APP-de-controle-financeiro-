@@ -49,7 +49,22 @@ class WallOfActionsFragment : Fragment() {
 
     private fun initSpinnerOrder() {
         binding.spinnerOrder.apply {
-            val orderList = listOf("Ordernar por", "Data")
+            val orderList = listOf(
+                "Selecione uma data",
+                "Todos as datas",
+                "Janeiro",
+                "Feveiro",
+                "Março",
+                "Abril",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            )
             val adapterOrders = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_spinner_dropdown_item,
