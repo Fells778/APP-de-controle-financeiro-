@@ -1,22 +1,27 @@
 package com.example.app_controle_financeiro.ui
 
 import android.content.Context
+import android.icu.text.DecimalFormat
+import com.example.app_controle_financeiro.utils.Helpers.formatCurrency
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.app_controle_financeiro.adapters.WallOfActionsAdapter
 import com.example.app_controle_financeiro.databinding.FragmentWallOfActionsBinding
 import com.example.app_controle_financeiro.utils.Actions
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import okhttp3.internal.format
 
 class WallOfActionsFragment : Fragment() {
     private lateinit var binding: FragmentWallOfActionsBinding
     private lateinit var adapterWall: WallOfActionsAdapter
+    private val viewModel: SpendingGraphViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +40,7 @@ class WallOfActionsFragment : Fragment() {
         initRecyclerView()
         adapterWall.submitList(actions)
         initSpinnerOrder()
+        updateTotalValues()
     }
 
     private fun initRecyclerView() {
@@ -100,6 +106,16 @@ class WallOfActionsFragment : Fragment() {
         }
 
         return emptyList()
+    }
+
+    private fun updateTotalValues() {
+        val (totalSpent, totalInvestment) = viewModel.getTotalValues()
+
+        binding.apply {
+            textViewTotalSpending.text = formatCurrency(totalSpent)
+            textViewTotalInvestments.text = formatCurrency(totalInvestment)
+
+        }
     }
 
 

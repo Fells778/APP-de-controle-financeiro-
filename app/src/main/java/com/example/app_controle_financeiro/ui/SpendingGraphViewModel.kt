@@ -22,13 +22,13 @@ class SpendingGraphViewModel(application: Application) : AndroidViewModel(applic
         loadData()
     }
 
-     fun loadData(){
+    fun loadData() {
         val json = sharedPreferences.getString("actionsList", null)
         if (json != null) {
             val gson = Gson()
             val type = object : TypeToken<List<Actions>>() {}.type
             _actions.value = gson.fromJson(json, type)
-        } else  {
+        } else {
             _actions.value = emptyList()
         }
     }
@@ -52,7 +52,7 @@ class SpendingGraphViewModel(application: Application) : AndroidViewModel(applic
 
     fun getPieChartData(): List<PieEntry> {
         val actionsList = _actions.value ?: emptyList()
-        val totalSpending = actionsList.filter { it.action == "Gasto"}
+        val totalSpending = actionsList.filter { it.action == "Gasto" }
             .mapNotNull { it.value }
             .sum()
         val totalInvestment = actionsList.filter { it.action == "Investimento" }
@@ -69,5 +69,17 @@ class SpendingGraphViewModel(application: Application) : AndroidViewModel(applic
             PieEntry(spendingPercentage, "Gastos"),
             PieEntry(investmentPercentage, "Investimentos")
         )
+    }
+
+    fun getTotalValues(): Pair<Float, Float> {
+        val actionsList = _actions.value ?: emptyList()
+        val totalSpent =
+            actionsList.filter { it.action == "Gasto" }.sumOf { it.value?.toDouble() ?: 0.0 }
+                .toFloat()
+        val totalInvestment =
+            actionsList.filter { it.action == "Investimento" }.sumOf { it.value?.toDouble() ?: 0.0 }
+                .toFloat()
+
+        return Pair(totalSpent, totalInvestment)
     }
 }

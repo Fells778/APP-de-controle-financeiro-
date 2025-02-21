@@ -38,6 +38,8 @@
     <string name="spending_list">Spending List</string>
     <string name="spending_graph">Spending graph</string>
     <string name="string_image_without_caption">Imagem sem legenda</string>
+    <string name="string_total_spending">Total de Gastos:</string>
+    <string name="string_total_investments">Total de Investimentos:</string>
 
     <string-array name="string_array_types">
         <item>Selecione o tipo</item>
