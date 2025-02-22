@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.app_controle_financeiro.R
 import com.example.app_controle_financeiro.databinding.FragmentSpendingGraphBinding
 import com.example.app_controle_financeiro.utils.DecimalValueFormatter
+import com.example.app_controle_financeiro.utils.Helpers
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
@@ -47,6 +48,7 @@ class SpendingGraphFragment : Fragment() {
         }
         viewModel.actions.observe(viewLifecycleOwner) {
             loadPieChartData()
+            updateTotalValues()
         }
     }
 
@@ -109,6 +111,15 @@ class SpendingGraphFragment : Fragment() {
             }
             invalidate() // Atualize o gráfico
             animateY(1000, Easing.EaseInOutCirc)
+        }
+    }
+
+    private fun updateTotalValues() {
+        val (totalSpent, totalInvestment) = viewModel.getTotalValues()
+
+        binding.apply {
+            textViewTotalSpentGraph.text = Helpers.formatCurrency(totalSpent)
+            textViewTotalInvestmentGraph.text = Helpers.formatCurrency(totalInvestment)
         }
     }
 }

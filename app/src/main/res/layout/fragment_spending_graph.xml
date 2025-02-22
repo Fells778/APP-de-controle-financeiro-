@@ -7,20 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pieChart"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12"
-            app:layout_constraintVertical_bias="1.0">
-
-        </com.github.mikephil.charting.charts.PieChart>
-
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
@@ -34,5 +20,86 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+        </com.github.mikephil.charting.charts.PieChart>
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/string_total_spending"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_total_spent_graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/string_total_spending"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/textView15"
+            app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+        <ImageView
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/baseline_currency_exchange_24"
+            android:contentDescription="@string/string_image_without_caption"
+            app:layout_constraintStart_toEndOf="@+id/textView_total_spent_graph"
+            app:layout_constraintTop_toTopOf="@+id/textView_total_spent_graph" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/string_total_investments"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/textView_total_investment_graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/string_total_investments"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <ImageView
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/baseline_data_thresholding_24"
+            android:contentDescription="@string/string_image_without_caption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView_total_investment_graph"
+            app:layout_constraintTop_toTopOf="@+id/textView_total_investment_graph" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

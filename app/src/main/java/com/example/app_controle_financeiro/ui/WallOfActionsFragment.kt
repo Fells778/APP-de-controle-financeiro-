@@ -40,7 +40,9 @@ class WallOfActionsFragment : Fragment() {
         initRecyclerView()
         adapterWall.submitList(actions)
         initSpinnerOrder()
-        updateTotalValues()
+        viewModel.actions.observe(viewLifecycleOwner) {
+            updateTotalValues()
+        }
     }
 
     private fun initRecyclerView() {
